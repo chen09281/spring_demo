@@ -128,4 +128,28 @@ public class UserController {
         // 存入session
         session.setAttribute("checkCodeGen",checkCode);
     }
+
+    // 不需要验证码的注册测试
+    @RequestMapping("/regit1")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ResponseBody
+    private void regit1(User user,HttpServletResponse response) throws IOException {
+        userService.regit(user);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().println("注册成功");
+
+    }
+
+    /**
+     * 忘记密码
+     * @author Chen
+     * @date 2022-6-14
+     * */
+    @RequestMapping("/lost")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ResponseBody
+    private List<User> lost(String userName){
+        List<User> users = userService.queryName(userName);
+        return users;
+    }
 }
