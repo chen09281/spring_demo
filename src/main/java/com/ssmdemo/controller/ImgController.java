@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,12 +34,26 @@ public class ImgController {
     @ResponseBody
     public User login(User user){
         System.out.println(user.getUserName());
-        if (USERNAME.equals(user.getUserName()) && PASSWORD.equals(user.getPassword())){
-            // 添加token
-            user.setToken(JwtUtil.createToken());
-            return user;
+        User test = imgService.query(user);
+        if (test == null){
+            return null;
         }
-        return null;
+        user.setToken(JwtUtil.createToken(test));
+        return user;
+    }
+
+    /**
+     * 校验token是否合法
+     * @author Chen
+     * @return boolean
+     * */
+    @GetMapping("checkToken")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ResponseBody
+    public Boolean checkToken(HttpServletRequest request){
+        String token = request.getHeader("token");
+        // 验证
+        return JwtUtil.checkToken(token);
     }
 
     // 测试上传用，可以删除
