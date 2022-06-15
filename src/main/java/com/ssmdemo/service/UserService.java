@@ -30,4 +30,6 @@ public interface UserService {
      * @param userName
      * */
     List<User> queryName(String userName);
+
+    User query(User user);
 }

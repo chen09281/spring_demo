@@ -18,9 +18,6 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/img")
 public class ImgController {
-
-    private final String USERNAME="admin";
-    private final String PASSWORD="123456";
     // 注入service
     @Autowired
     private ImgService imgService;

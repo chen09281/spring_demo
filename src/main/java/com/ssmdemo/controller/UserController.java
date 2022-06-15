@@ -3,12 +3,10 @@ package com.ssmdemo.controller;
 import com.ssmdemo.pojo.User;
 import com.ssmdemo.service.UserService;
 import com.ssmdemo.util.CheckCodeUtil;
+import com.ssmdemo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -35,6 +33,37 @@ public class UserController {
         return userList;
     }
 
+    /**
+     * 登录
+     * @author Chen
+     * @date 2022-6-15
+     * */
+    @RequestMapping("/login")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ResponseBody
+    public User login(User user){
+        System.out.println(user.getUserName());
+        User test = userService.query(user);
+        if (test == null){
+            return null;
+        }
+        user.setToken(JwtUtil.createToken(test));
+        return user;
+    }
+
+    /**
+     * 校验token是否合法
+     * @author Chen
+     * @return boolean
+     * */
+    @GetMapping("checkToken")
+    @CrossOrigin(origins = "*",maxAge = 3600)
+    @ResponseBody
+    public Boolean checkToken(HttpServletRequest request){
+        String token = request.getHeader("token");
+        // 验证
+        return JwtUtil.checkToken(token);
+    }
 
     // 测试cookie
     @RequestMapping("/cookie")
@@ -67,7 +96,7 @@ public class UserController {
         return userList;
     }
     // 登录
-    @RequestMapping("/login")
+/*    @RequestMapping("/login")
     @CrossOrigin(origins = "*",maxAge = 3600)
     @ResponseBody
     private void login(String username, String password, String checkCode, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -88,7 +117,7 @@ public class UserController {
                 System.out.println(username+"----------"+password); // 测试数据情况
                 response.getWriter().println(userList);
         }
-    }
+    }*/
     // 注册
     @RequestMapping(value = "/regit",method = RequestMethod.POST)
     @CrossOrigin(origins = "*",maxAge = 3600)

@@ -39,4 +39,10 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userDao.queryName(userName);
         return userList;
     }
+
+    @Override
+    public User query(User user) {
+        User user1 = userDao.query(user);
+        return user1;
+    }
 }

@@ -41,4 +41,6 @@ public interface UserDao {
 
     @Select("select * from where user_name = } )")
     User login1(User user);
+    @Select("select * from user where user_name=#{userName} and password = #{password}")
+    User query(User user);
 }
