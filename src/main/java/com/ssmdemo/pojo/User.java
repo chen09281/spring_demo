@@ -7,6 +7,16 @@ public class User {
     private String password;
     private String phone;
 
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -55,6 +65,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }
