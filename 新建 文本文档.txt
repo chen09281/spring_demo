@@ -1,0 +1,36 @@
+apt-get:[root@VM_0_9_centos ~]# curl https://raw.githubusercontent.com/dvershinin/apt-get-centos/master/apt-get.sh -o /usr/local/bin/apt-get
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1256  100  1256    0     0   1266      0 --:--:-- --:--:-- --:--:--  1266
+export PATH=$PATH:/usr/local/Python3.8/bin
+ find / -iname *chromium* 
+wget https://www.python.org/ftp/python/2.7/Python-2.7.tgz
+tar zxvf  Python-2.7.tgz -C ./
+./configure --prefix=/usr/local/python2.7
+./configure --prefix=/usr/local/python2.7
+rpm -ivh  --nodeps https://vault.centos.org/8.5.2111/AppStream/x86_64/kickstart/Packages/python2-2.7.18-7.module_el8.5.0+894+1c54b371.x86_64.rpm
+
+make && make install
+
+rpm -ivh  --nodeps https://vault.centos.org/8.5.2111/BaseOS/x86_64/os/Packages/python3-iniparse-0.4-31.el8.noarch.rpm
+rpm -ivh  --nodeps https://vault.centos.org/8.5.2111/BaseOS/x86_64/os/Packages/yum-4.7.0-4.el8.noarch.rpm
+rpm -ivh  --nodeps https://vault.centos.org/8.5.2111/BaseOS/x86_64/os/Packages/yum-utils-4.0.21-3.el8.noarch.rpm
+
+wget http://mirrors.163.com/centos/7/os/x86_64/Packages/yum-cron-3.4.3-168.el7.centos.noarch.rpm
+wget http://mirrors.163.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
+wget http://mirrors.163.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm
+wget https://vault.centos.org/8.5.2111/BaseOS/x86_64/os/Packages/yum-4.7.0-4.el8.noarch.rpm
+
+mv Centos-8.repo CentOS-Base.repo
+
+
+wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz
+tar zxvf  Python-3.6.0.tgz -C ./
+./configure --prefix=/usr/local/python3.6
+make && make install
+ln -s /usr/local/python3.6/bin/python3.6 /usr/bin/python3.6
+
+
+
+
+
